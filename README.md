@@ -15,6 +15,7 @@ HTML game that wants a window of its own.
 - `warp-template.json` — what the WarpEngine Toolbox's *New Game* copies from this repo
   ("Start from the template only"), with the app's name, title, author and description
   filled in. The toolbox writes `.woodpecker.yaml`, `metadata.json` and `README.md` itself.
+  The Hello World files are `templateOnly`: starting from the demo leaves them out.
 
 *Start from the demo* gives the [WarpEngine Client](https://git.teletypegames.org/stores/warp-engine-client)
 instead: a store client of your own, pointed at the catalog the toolbox is connected to.

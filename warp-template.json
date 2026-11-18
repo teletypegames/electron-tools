@@ -7,5 +7,16 @@
     "hello/index.html": "index.html",
     "hello/gitignore": ".gitignore"
   },
-  "fill": ["hello/package.json", "hello/package-lock.json", "hello/index.html"]
+  "fill": [
+    "hello/package.json",
+    "hello/package-lock.json",
+    "hello/index.html"
+  ],
+  "templateOnly": [
+    "hello/package.json",
+    "hello/package-lock.json",
+    "hello/main.js",
+    "hello/index.html",
+    "hello/gitignore"
+  ]
 }
