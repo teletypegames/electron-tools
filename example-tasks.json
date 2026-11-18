@@ -1,0 +1,30 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    // Copy to .vscode/tasks.json.
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start",
+            "type": "shell",
+            "command": "npm start",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Install dependencies",
+            "type": "shell",
+            "command": "npm install",
+            "problemMatcher": []
+        },
+        {
+            "label": "Package for this machine",
+            "type": "shell",
+            "command": "npm run dist",
+            "problemMatcher": []
+        }
+    ]
+}

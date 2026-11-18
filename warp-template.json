@@ -1,0 +1,11 @@
+{
+  "files": {
+    "example-tasks.json": ".vscode/tasks.json",
+    "hello/package.json": "package.json",
+    "hello/package-lock.json": "package-lock.json",
+    "hello/main.js": "main.js",
+    "hello/index.html": "index.html",
+    "hello/gitignore": ".gitignore"
+  },
+  "fill": ["hello/package.json", "hello/package-lock.json", "hello/index.html"]
+}

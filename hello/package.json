@@ -1,0 +1,26 @@
+{
+  "name": "{name}",
+  "productName": "{title}",
+  "version": "0.1.0",
+  "description": "{description}",
+  "author": "{author}",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --publish never",
+    "dist:linux": "electron-builder --linux AppImage --x64 --publish never",
+    "dist:win": "electron-builder --win nsis --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "43.4.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "org.warpengine.{name}",
+    "productName": "{title}",
+    "files": ["main.js", "index.html", "package.json"],
+    "linux": { "target": "AppImage", "category": "Game" },
+    "win": { "target": "nsis" },
+    "mac": { "target": "zip" }
+  }
+}
