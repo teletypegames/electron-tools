@@ -1,0 +1,13 @@
+{
+  "name": "{title}",
+  "build": { "dockerfile": "Dockerfile" },
+  "runArgs": ["--add-host=host.docker.internal:host-gateway"],
+  "mounts": ["source={name}-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"],
+  "postCreateCommand": "sudo chown dev:dev node_modules",
+  "remoteUser": "dev",
+  "updateRemoteUserUID": true,
+  "remoteEnv": { "WARPENGINE_DEVCONTAINER": "1" },
+  "customizations": {
+    "vscode": { "extensions": ["TeletypeGames.warpengine-toolbox"] }
+  }
+}

@@ -1,5 +1,6 @@
 {
   "files": {
+    "example-makefile.make": "Makefile",
     "example-tasks.json": ".vscode/tasks.json",
     "hello/package.json": "package.json",
     "hello/package-lock.json": "package-lock.json",
@@ -17,6 +18,18 @@
     "hello/package-lock.json",
     "hello/main.js",
     "hello/index.html",
-    "hello/gitignore"
-  ]
+    "hello/gitignore",
+    "example-makefile.make"
+  ],
+  "devcontainer": {
+    "files": {
+      "example-devcontainer.json": ".devcontainer/devcontainer.json",
+      "example-devcontainer.Dockerfile": ".devcontainer/Dockerfile"
+    },
+    "fill": [
+      "example-devcontainer.json",
+      "example-devcontainer.Dockerfile"
+    ],
+    "tasks": "example-devcontainer-tasks.json"
+  }
 }

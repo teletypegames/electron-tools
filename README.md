@@ -8,8 +8,9 @@ HTML game that wants a window of its own.
   (version → linux → windows → upload → publish) is served by the update server's Woodpecker
   configuration extension; preview it with
   `curl "https://teletypegames.org/build/config?platform=electron"`.
-- `example-tasks.json` — VS Code `.vscode/tasks.json`: **Start** (`npm start`, the default
-  build task, `Cmd+Shift+B`), **Install dependencies** and **Package for this machine**.
+- `example-tasks.json` — VS Code `.vscode/tasks.json`: `build` (the default
+  build task) and `package (Linux)` as `warpengine` tasks on the `Makefile`,
+  and `run (Electron)` (`npm start` on this computer).
 - `hello/` — a minimal Hello World app: `package.json` with `electron` and `electron-builder`
   pinned, its `package-lock.json` (the pipeline runs `npm ci`), `main.js`, `index.html`.
 - `warp-template.json` — what the WarpEngine Toolbox's *New Game* copies from this repo
@@ -42,3 +43,16 @@ npm install
 npm start          # run it
 npm run dist       # package for this machine
 ```
+
+## Dev container
+
+`warp-template.json` has a `devcontainer` key that the WarpEngine Toolbox reads
+(an older toolbox ignores it): a new project gets `.devcontainer/` from
+`example-devcontainer.json` and `example-devcontainer.Dockerfile` — the CI
+builder image the host names (`{builderImage}`) plus git and a `dev` user —
+so a computer with only Docker builds with the same toolchain as the pipeline.
+The tasks of `example-devcontainer-tasks.json` are merged into
+`.vscode/tasks.json`: `dev image` builds the container image, `play` builds the
+game and plays it in the host's web runtime. A new project from the template (not from the demo, which has its own) also gets `example-makefile.make` as its `Makefile`, the pipeline's npm steps as targets (`build`: `npm ci`, `check`, `build`; `package`: the Linux AppImage). In the container `node_modules` is a volume of its own, apart from the one of this computer, so the Linux packages there never mix with yours. The app window does not open in the container: `run (Electron)` builds there and runs `npm start` here, with a local Node; `play` shows `index.html` in the Play panel.
+For an existing game repo, *WarpEngine: Add Dev Container* adds it and merges
+the tasks, keeping yours.

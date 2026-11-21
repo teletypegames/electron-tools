@@ -1,30 +1,25 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    // Copy to .vscode/tasks.json.
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Start",
-            "type": "shell",
-            "command": "npm start",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "Install dependencies",
-            "type": "shell",
-            "command": "npm install",
-            "problemMatcher": []
-        },
-        {
-            "label": "Package for this machine",
-            "type": "shell",
-            "command": "npm run dist",
-            "problemMatcher": []
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "detail": "Installs the dependencies and runs the check and build scripts",
+      "type": "warpengine",
+      "target": "build",
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "package (Linux)",
+      "detail": "Packages the Linux AppImage with electron-builder",
+      "type": "warpengine",
+      "target": "package"
+    },
+    {
+      "label": "run (Electron)",
+      "detail": "Starts the app with Electron on this computer: needs a local Node, does not run in the dev container",
+      "type": "warpengine",
+      "target": "run",
+      "host": true
+    }
+  ]
 }
