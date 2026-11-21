@@ -54,5 +54,6 @@ so a computer with only Docker builds with the same toolchain as the pipeline.
 The tasks of `example-devcontainer-tasks.json` are merged into
 `.vscode/tasks.json`: `dev image` builds the container image, `play` builds the
 game and plays it in the host's web runtime. A new project from the template (not from the demo, which has its own) also gets `example-makefile.make` as its `Makefile`, the pipeline's npm steps as targets (`build`: `npm ci`, `check`, `build`; `package`: the Linux AppImage). In the container `node_modules` is a volume of its own, apart from the one of this computer, so the Linux packages there never mix with yours. The app window does not open in the container: `run (Electron)` builds there and runs `npm start` here, with a local Node; `play` shows `index.html` in the Play panel.
+The container editor gets its extensions from `example-devcontainer.json`: the WarpEngine Toolbox, Makefile Tools (its configure prompts off; the Toolbox tasks build) and ESLint and Prettier.
 For an existing game repo, *WarpEngine: Add Dev Container* adds it and merges
 the tasks, keeping yours.
