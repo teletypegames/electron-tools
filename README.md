@@ -18,7 +18,7 @@ HTML game that wants a window of its own.
   filled in. The toolbox writes `.woodpecker.yaml`, `metadata.json` and `README.md` itself.
   The Hello World files are `templateOnly`: starting from the demo leaves them out.
 
-*Start from the demo* gives the [WarpEngine Client](https://git.teletypegames.org/stores/warp-engine-client)
+*Start from the demo* gives the [WarpEngine Desktop](https://git.teletypegames.org/stores/we-desktop)
 instead: a store client of your own, pointed at the catalog the toolbox is connected to.
 
 ## What the pipeline expects
