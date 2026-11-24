@@ -4,10 +4,14 @@ Templates for desktop apps built with [Electron](https://www.electronjs.org) on 
 WarpEngine `electron` platform (WarpEngine 4.3+): a store client, a launcher, a tool, or an
 HTML game that wants a window of its own.
 
-- `example-woodpecker.yaml` — the one-line marker (`platform: electron`): the full pipeline
+- `.woodpecker.yaml` (written by New Game, not kept here) — the one-line marker
+  (`platform: electron`): the full pipeline
   (version → linux → windows → upload → publish) is served by the update server's Woodpecker
   configuration extension; preview it with
   `curl "https://teletypegames.org/build/config?platform=electron"`.
+- `example-makefile.make` — the `Makefile` of a new project from the template: the
+  shared targets (`build`, `run`, `check`, `clean`, `mac-release`, see below) plus
+  `install` and `package` (the Linux AppImage).
 - `example-tasks.json` — VS Code `.vscode/tasks.json`: `build` (the default
   build task) and `package (Linux)` as `warpengine` tasks on the `Makefile`,
   and `run (Electron)` (`npm start` on this computer).
@@ -30,11 +34,42 @@ instead: a store client of your own, pointed at the catalog the toolbox is conne
 
 The pipeline builds a Linux AppImage (`<name>-<version>-linux-x64.zip`, always) and a
 Windows NSIS installer (`<name>-<version>-win-x64.zip`, through Wine on an x86_64 CI agent).
-macOS packages need a Mac: `npm run dist` there, zip the result as
-`<name>-<version>-mac-arm64.zip` and upload it with `/build/upload`.
+macOS packages need a Mac: `make mac-release` there (below).
 
 The builder image is `git.teletypegames.org/build/electron-builder`:
 `electronuserland/builder:22-wine`, mirrored unchanged.
+
+## Makefile contract
+
+The Makefile has the targets every WarpEngine template shares: `build`, `run`, `check` (the CI's check step runs it in the builder image),
+`clean` and `mac-release` (the macOS zips, built and released on a Mac). `warp-engine check makefile` of the
+[WarpEngine CLI](https://wiki.teletypegames.org/godoc/warp-engine-cli/latest/cmd/warp-engine/)
+checks a project against it. `check` runs the `check` script of
+`package.json` when there is one; the pipeline runs it itself (`check: false` in the
+platform's template), so the CI does not call `make check`.
+
+## macOS packages
+
+`mac-release` builds a zip per architecture (`mac-x64`, `mac-arm64`) with
+`electron-builder --mac zip` on the Mac and releases them with the
+[WarpEngine CLI](https://wiki.teletypegames.org/godoc/warp-engine-cli/latest/cmd/warp-engine/):
+`warp-engine release upload` sends the zips into the release's folder and
+`warp-engine release publish --platform electron` publishes the release again, which keeps
+the CI's files and adds these. Install the CLI once on the Mac (into `~/.local/bin`):
+
+```sh
+curl -fsSL https://git.teletypegames.org/engines/warp-engine-cli/raw/branch/master/install.sh | sh
+```
+
+or, with Go, `go install git.teletypegames.org/engines/warp-engine-cli/cmd/warp-engine@latest`.
+The token is an application token with the `update` + `upload` scopes; the server is
+`WARP_SERVER` (default `https://teletypegames.org`):
+
+```sh
+WARP_TOKEN=... make mac-release VERSION=x.y.z
+```
+
+Run it after the CI pipeline has created the release.
 
 ## Locally
 
