@@ -40,7 +40,7 @@ run:
 # the CI published and publishes it again (warp-engine, the WarpEngine CLI)
 mac-release: build
 	@if [ "$$(uname -s)" != "Darwin" ]; then echo "ERROR: the macOS packages are built on a Mac"; exit 1; fi
-	@command -v $(WARP_ENGINE) >/dev/null 2>&1 || { echo "ERROR: $(WARP_ENGINE) (the WarpEngine CLI) is not installed, see README.md"; exit 1; }
+	@command -v $(WARP_ENGINE) >/dev/null 2>&1 || { echo "ERROR: $(WARP_ENGINE) (the WarpEngine CLI) is not installed: curl -fsSL https://git.teletypegames.org/engines/warp-engine-cli/raw/branch/master/install.sh | sh"; exit 1; }
 	@set -e; for arch in $(MAC_ARCHS); do \
 		rm -f dist/*.zip; \
 		npx --no-install electron-builder --mac zip --$$arch --publish never; \
